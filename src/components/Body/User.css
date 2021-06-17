@@ -1,0 +1,25 @@
+.logout {
+    display: grid;
+    place-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  
+  .logout__button{
+      min-width: 300px;
+      padding: 17px 30px;
+      margin-top: 20px;
+      background-color: black;
+      border: none;
+      color: white;
+      font-size: 14px;
+      font-family: "Inter";
+      border-radius: 3px;
+
+  }
+  .logout__name{
+    color: #2EA043;
+}
