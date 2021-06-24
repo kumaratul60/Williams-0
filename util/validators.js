@@ -2,7 +2,8 @@ module.exports.validateRegisterInput = (
   username,
   email,
   password,
-  confirmPassword
+  confirmPassword,
+  type
 ) => {
   const errors = {};
   if (username.trim() === "") {
@@ -18,19 +19,24 @@ module.exports.validateRegisterInput = (
     }
   }
   if (password.trim() === "") {
-    errors.password = "password must empty";
+    errors.password = "password must not be  empty";
   } else if (password !== confirmPassword) {
-    errors.confirmPassword = "password not match";
+    errors.confirmPassword = "password not  be match";
+  }
+  if (username.trim() === "admin") {
+    if (type.trim() === "") {
+      errors.type = "type must not be empty";
+    }
   }
   return {
     errors,
-    valid: Object.keys(errors).length < 1, // if valid is true there means there is no error, or if error length < 1  means therre is no error
+    valid: Object.keys(errors).length < 1, // if valid is true there means there is no error, or if error length < 1  means there is no error
   };
 };
 
 // validate the login
 
-module.exports.valideateLoginInput = (username, password) => {
+module.exports.validateLoginInput = (username, password, type) => {
   const errors = {};
   if (username.trim() === "") {
     errors.username = "Username must not be empty";
@@ -38,10 +44,14 @@ module.exports.valideateLoginInput = (username, password) => {
   if (password.trim() === "") {
     errors.password = "Password must not be empty";
   }
+  if (username.trim() === "admin") {
+    if (type.trim() === "") {
+      errors.type = "type must not be empty";
+       
+    }
+  }
   return {
     errors,
     valid: Object.keys(errors).length < 1,
-  }
-
-
+  };
 };

@@ -13,12 +13,14 @@ module.exports = graphql`
     token: String!
     username: String!
     createdAt: String!
+    type:String
   }
   input RegisterInput {
     username: String!
     password: String!
     confirmPassword: String!
     email: String!
+    type: String
   }
 
   type Query {
@@ -28,6 +30,6 @@ module.exports = graphql`
   }
   type Mutation {
     register(registerInput: RegisterInput): User!
-    login(username: String!, password: String!): User!
+    login(username: String!, password: String!, type: String): User!
   }
 `;

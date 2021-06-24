@@ -5,7 +5,7 @@ const { UserInputError } = require("apollo-server");
 
 const {
   validateRegisterInput,
-  valideateLoginInput,
+  validateLoginInput,
 } = require("../../util/validators");
 const { SECRET_KEY } = require("../../config");
 const User = require("../../models/User");
@@ -16,6 +16,7 @@ function generateToken(user) {
       id: user.id,
       email: user.email,
       username: user.username,
+      type: user.type,
     },
     SECRET_KEY,
     { expiresIn: "1h" }
@@ -24,8 +25,8 @@ function generateToken(user) {
 
 module.exports = {
   Mutation: {
-    async login(_, { username, password }) {
-      const { errors, valid } = valideateLoginInput(username, password);
+    async login(_, { username, password, type }) {
+      const { errors, valid} = validateLoginInput(username, password);
 
       if (!valid) {
         throw new UserInputError("Errors", { errors });
@@ -62,7 +63,7 @@ module.exports = {
     async register(
       _,
       {
-        registerInput: { username, email, password, confirmPassword },
+        registerInput: { username, email, password, confirmPassword, type },
         context,
         info,
       }
@@ -72,7 +73,8 @@ module.exports = {
         username,
         email,
         password,
-        confirmPassword
+        confirmPassword,
+      
       );
       if (!valid) {
         throw new UserInputError("Error", { errors });
@@ -97,6 +99,7 @@ module.exports = {
         username,
         password,
         createdAt: new Date().toISOString(), // toISOString() it convert to string
+         type,
       });
 
       const res = await newUser.save();

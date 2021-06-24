@@ -25,7 +25,7 @@ function MenuBar() {
     </Menu>
   ) : (
     <Menu pointing secondary size="massive" color="teal">
-      <Menu.Item 
+      <Menu.Item
         name="home"
         active={activeItem === "home"}
         onClick={handleItemClick}

@@ -15,6 +15,7 @@ function Register(props) {
     email: "",
     password: "",
     confirmPassword: "",
+    type: "",
   });
 
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
@@ -71,6 +72,14 @@ function Register(props) {
           type="password"
           value={values.confirmPassword}
           error={errors.confirmPassword ? true : false}
+          onChange={onChange}
+        />
+        <Form.Input
+          label="Type"
+          placeholder="type.."
+          name="type"
+          type="number"
+          value={values.type}
           onChange={onChange}
         />
         <Button type="submit" primary>

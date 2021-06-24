@@ -13,6 +13,7 @@ function Login(props) {
   const { onChange, onSubmit, values } = useForm(loginUserCallback, {
     username: "",
     password: "",
+    type: "",
   });
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
@@ -52,6 +53,15 @@ function Login(props) {
           error={errors.password ? true : false}
           onChange={onChange}
         />
+        <Form.Input
+          label="Type"
+          placeholder="type.."
+          name="type"
+          type="number"
+          value={values.type}
+          onChange={onChange}
+        />
+
         <Button type="submit" primary>
           Login
         </Button>
